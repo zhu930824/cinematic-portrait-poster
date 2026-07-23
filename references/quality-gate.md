@@ -17,9 +17,16 @@
 - Are traditional materials culturally and narratively grounded?
 - Are there generated text artifacts, extra limbs, false faces, or accidental logos?
 - Does the structure avoid recognizable imitation of an existing poster?
+- Would the concept still work without cinematic glow, debris, smoke, or an action pose?
+- If an authored reference was supplied, were its name and recognizable signatures removed from the generation prompt?
+- Does the originality delta change at least four axes from the reference?
 
 ## Typography and facts
 
+- Does the final poster visibly contain the exact film title?
+- Does the title participate in the composition rather than sit in an arbitrary leftover corner?
+- Does the final poster contain verified director and principal-cast credits, plus the screenwriter when reliably available?
+- Is the credit source recorded, and are names, roles, language variant, punctuation, and billing order accurate?
 - Are title, names, date, punctuation, and language variant exact?
 - Are all awards, laurels, logos, ratings, and credits supplied or verified?
 - Is every placeholder disclosed?

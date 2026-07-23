@@ -1,4 +1,5 @@
 {
+  "credit_sources": [],
   "text_blocks": [
     {
       "text": "电影片名",
@@ -16,7 +17,7 @@
       "text": "ENGLISH TITLE",
       "role": "english_title",
       "x": 0.08,
-      "y": 0.88,
+      "y": 0.82,
       "font_size": 0.018,
       "color": "#171411",
       "align": "left",
@@ -28,7 +29,7 @@
       "text": "一句经过确认的短宣传语",
       "role": "tagline",
       "x": 0.08,
-      "y": 0.92,
+      "y": 0.865,
       "font_size": 0.018,
       "color": "#5A554F",
       "align": "left",
@@ -37,15 +38,17 @@
       "font": null
     },
     {
-      "text": "20XX.XX.XX",
-      "role": "release_date_placeholder",
-      "x": 0.92,
+      "text": "导演：姓名  编剧：姓名\n主演：姓名 / 姓名 / 姓名",
+      "role": "verified_credits_placeholder",
+      "x": 0.08,
       "y": 0.92,
-      "font_size": 0.022,
-      "color": "#9F261E",
-      "align": "right",
+      "font_size": 0.012,
+      "color": "#6B655E",
+      "align": "left",
       "orientation": "horizontal",
-      "tracking": 0.002,
+      "tracking": 0.001,
+      "max_width": 0.84,
+      "line_spacing": 1.18,
       "font": null
     }
   ]

@@ -1,4 +1,4 @@
 interface:
   display_name: "Cinematic Portrait Poster"
-  short_description: "生成具有东方叙事美学的原创竖版电影海报与精确文字排版"
-  default_prompt: "Use $cinematic-portrait-poster to turn my film brief into an original vertical cinematic poster."
+  short_description: "原创叙事海报、一体化片名与演职员精排"
+  default_prompt: "Use $cinematic-portrait-poster to create an original vertical movie poster with an integrated title and verified cast-and-crew credits."

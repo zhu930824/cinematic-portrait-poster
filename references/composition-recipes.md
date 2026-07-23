@@ -37,6 +37,20 @@
 - **Science fiction**: scale reversal, containment, temporal fold; avoid automatic neon, holographic UI, and blue-orange spectacle.
 - **Documentary**: archive or craft materials, collective-symbol, object-world; do not fictionalize evidence.
 
+## Poetic symbolic bias
+
+Use this bias when the brief asks for authored, Eastern, literary, or festival-poster restraint:
+
+- start from negative-reveal, object-world, scale reversal, containment, or temporal fold;
+- keep one dominant symbol and let empty space perform a narrative function;
+- make the far read simple enough to describe in five words;
+- reserve the near read for one concealed relationship, not ornamental detail;
+- reduce character scale unless face-level intimacy is the film's true core;
+- derive any traditional material from story, place, period, profession, or philosophy;
+- prefer quiet tension, visual paradox, or emotional afterimage over explosive action.
+
+Reject the direction when removing glow, debris, smoke, or a dramatic pose also removes all meaning. Those effects may support the metaphor but cannot be the metaphor.
+
 ## Palette logic
 
 Assign functions before colors:
