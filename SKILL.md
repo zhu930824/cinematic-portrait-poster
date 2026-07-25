@@ -22,7 +22,7 @@ Read only what the task needs:
 - Read [references/composition-recipes.md](references/composition-recipes.md) to choose layout, material, palette, and genre treatment.
 - Read [references/authored-reference-translation.md](references/authored-reference-translation.md) whenever the user names an artist, studio, campaign, poster, or visual reference.
 - Read [references/typography.md](references/typography.md) before adding real titles, credits, dates, or bilingual copy.
-- Read [references/title-design-patterns.md](references/title-design-patterns.md) when the title must become a dominant visual structure, use custom character construction, or move beyond ordinary font selection.
+- Read [references/title-design-patterns.md](references/title-design-patterns.md) when designing any expressive title, dominant title structure, material-filled glyph, custom character construction, or typography-led series.
 - Read [references/quality-gate.md](references/quality-gate.md) before final delivery.
 
 ## Workflow
@@ -74,6 +74,8 @@ Make the concepts structurally different. For each provide:
 - one-sentence visual hook;
 - primary motif and metaphor operation;
 - composition family, material, palette, typography mode, title-integration behavior, and credit-block zone;
+- title material fact, semantic pivot, one title action, text-reserve level, and beauty engine;
+- why the title mechanism cannot be moved unchanged to an unrelated film;
 - why it belongs to this film;
 - spoiler risk: low, medium, or high.
 
@@ -83,6 +85,8 @@ Before selecting, run a spectacle test: if the concept depends mainly on a drama
 
 Run a title test: if the title could be moved anywhere without changing the composition, redesign its scale, axis, interruption, containment, alignment, or material echo. The title must participate in the visual system without asking the image model to draw the final letters.
 
+Run the semantic mechanism gate in `references/title-design-patterns.md`. Reject a title direction when its story inevitability, formal beauty, or legibility scores below 4/5. Use one primary evidence field, one title action, and at most one interruptor. Mentally hide the title for one second; if the remaining image has no sensory or emotional pull, rebuild the image language.
+
 ### 5. Compile the visual recipe
 
 Choose one value from each axis:
@@ -90,6 +94,7 @@ Choose one value from each axis:
 ```text
 format / composition family / metaphor operation / primary motif /
 scale relation / material process / palette / title behavior /
+title action / text reserve / interruptor / beauty engine /
 credit behavior / emotional temperature
 ```
 
@@ -119,6 +124,8 @@ Scrub the prompt before generation:
 
 Generate **text-free key art by default**, but compose it around an intentional title zone and a readable credit zone. Permit only abstract glyph-like marks when they are part of the image. Reserve exact Chinese titles, credits, dates, and billing for deterministic typesetting.
 
+State whether the text reserve is low (12–22%), medium (25–38%), or high (40–55%) and name the exact content it supports. The open field must carry reading, silence, distance, pressure, or scale; it cannot be unexplained emptiness.
+
 Hard avoids:
 
 - celebrity head grids or floating-head montage unless explicitly requested;
@@ -147,11 +154,13 @@ For every Standard or Series poster:
 
 1. typeset the exact film title as a dominant designed element;
 2. make its axis, scale, spacing, color, and position complete the selected metaphor;
-3. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
-4. use per-character construction or one story-grounded effect when the title needs custom form;
-5. typeset a verified credit block containing at minimum the director and principal cast, plus the screenwriter when reliably available;
-6. keep credits subordinate but readable at full size;
-7. inspect title-motif interaction and credit legibility at both full size and thumbnail size.
+3. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
+4. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
+5. use per-character construction, one selected material image, or one story-grounded effect when the title needs custom form;
+6. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
+7. typeset a verified credit block containing at minimum the director and principal cast, plus the screenwriter when reliably available;
+8. keep credits subordinate but readable at full size;
+9. inspect title-motif interaction and credit legibility at both full size and thumbnail size.
 
 Prefer an explicitly supplied licensed font. The script can use common system fallbacks, but verify Chinese glyph coverage visually. Never fabricate names, roles, billing order, production companies, or a production billing block.
 

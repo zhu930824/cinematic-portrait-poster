@@ -1,5 +1,17 @@
 {
   "credit_sources": [],
+  "title_design": {
+    "primary_evidence": null,
+    "material_fact": null,
+    "semantic_pivot": null,
+    "title_action": null,
+    "dominant_axis": null,
+    "text_reserve": "medium",
+    "text_reserve_job": null,
+    "interruptor": null,
+    "beauty_engine": null,
+    "post_view_reward": null
+  },
   "text_blocks": [
     {
       "text": "电影片名",

@@ -25,6 +25,13 @@
 
 - Does the final poster visibly contain the exact film title?
 - Does the title participate in the composition rather than sit in an arbitrary leftover corner?
+- Does the title use one story-grounded action rather than several decorative effects?
+- Is there one observable primary material or evidence field?
+- Does the text reserve have a named purpose rather than behaving as unexplained emptiness?
+- Does the poster remain visually compelling when the title is mentally hidden?
+- Would the title mechanism fail if moved unchanged to an unrelated film?
+- Has the exact official title been preserved unless an alternate campaign title was explicitly approved?
+- In a series, does the title mechanism avoid repeating either of the two previous structures?
 - Does the final poster contain verified director and principal-cast credits, plus the screenwriter when reliably available?
 - Is the credit source recorded, and are names, roles, language variant, punctuation, and billing order accurate?
 - Are title, names, date, punctuation, and language variant exact?

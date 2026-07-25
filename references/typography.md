@@ -40,6 +40,10 @@ Keep exact letters deterministic. Do not ask the image model to render the title
 
 When font selection alone cannot express the film, read `title-design-patterns.md`. Reconstruct the title through scale, position, negative space, outline, reflection, or material logic. Preserve legibility; expressive typography is a narrative structure, not arbitrary distortion.
 
+Do not import editorial-cover title shortening into theatrical film titles. Keep the exact approved film title. Refine it through line breaks, scale groups, semantic zones, or secondary campaign copy instead of deleting official words.
+
+Choose one primary evidence field, one title action, and at most one interruptor. Reserve low (12–22%), medium (25–38%), or high (40–55%) calm space and state what exact title, credit, copy, or emotional pause occupies it.
+
 ## Title behaviors
 
 - quiet suspension in active negative space;
@@ -98,6 +102,6 @@ Use `"effect": "split_chalk"` only when fractured, athletic, handmade title lett
 
 Use `"effect": "rain_canopy"` when rain, shelter, growth, or forest protection is central to the story. It divides a bold title into canopy and trunk zones, cuts narrow rain channels through the strokes, and introduces small leaf-like voids near the lower edge. Use it with restrained displacement so the exact title remains legible.
 
-Additional structural effects are documented in `title-design-patterns.md`: `stroke_architecture`, `negative_window`, `outline_echo`, and `mirror_fade`. Use `character_layout` for per-character scale, offset, rotation, color, and stroke. Combine no more than one structural effect with one story-grounded material treatment.
+Additional structural effects are documented in `title-design-patterns.md`: `stroke_architecture`, `negative_window`, `interrupt_cut`, `relief_press`, `outline_echo`, and `mirror_fade`. Use `effect_windows` for one precise negative-space opening. Use `character_layout` for per-character scale, offset, rotation, color, opacity, stroke, or a traceable `fill_image`. Combine no more than one structural effect with one story-grounded material treatment.
 
 Export delivered posters with `compose_poster.py --final`. The final-copy check requires `title` and `verified_credits` roles, a non-empty `credit_sources` array, and no common placeholder tokens.

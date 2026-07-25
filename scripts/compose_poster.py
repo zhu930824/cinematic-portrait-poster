@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import random
 from pathlib import Path
 from typing import Iterable
@@ -136,7 +137,7 @@ def draw_character_layout(
     align: str,
     base_size: int,
 ) -> None:
-    """Draw a single-line title with per-character scale, offset, rotation, and color."""
+    """Draw a title with per-character geometry, color, stroke, or material fill."""
     chars = [char for char in str(block["text"]) if char not in "\r\n"]
     specs = block.get("character_layout")
     if not isinstance(specs, list) or not specs:
@@ -170,16 +171,81 @@ def draw_character_layout(
             max(1, bbox[2] - bbox[0] + pad * 2),
             max(1, bbox[3] - bbox[1] + pad * 2),
         )
-        glyph = Image.new("RGBA", glyph_size, (0, 0, 0, 0))
-        glyph_draw = ImageDraw.Draw(glyph)
-        glyph_draw.text(
-            (pad - bbox[0], pad - bbox[1]),
+        text_xy = (pad - bbox[0], pad - bbox[1])
+        glyph_mask = Image.new("L", glyph_size, 0)
+        glyph_mask_draw = ImageDraw.Draw(glyph_mask)
+        glyph_mask_draw.text(
+            text_xy,
             char,
             font=font,
-            fill=spec.get("color", fill),
-            stroke_width=max(0, round(float(spec.get("stroke_width", 0)) * layer.width)),
-            stroke_fill=spec.get("stroke_color", spec.get("color", fill)),
+            fill=255,
         )
+
+        glyph = Image.new("RGBA", glyph_size, (0, 0, 0, 0))
+        stroke_width = max(0, round(float(spec.get("stroke_width", 0)) * layer.width))
+        if stroke_width:
+            stroke_mask = Image.new("L", glyph_size, 0)
+            stroke_mask_draw = ImageDraw.Draw(stroke_mask)
+            stroke_mask_draw.text(
+                text_xy,
+                char,
+                font=font,
+                fill=255,
+                stroke_width=stroke_width,
+                stroke_fill=255,
+            )
+            stroke_only = ImageChops.subtract(stroke_mask, glyph_mask)
+            glyph.alpha_composite(
+                colorize_mask(
+                    stroke_only,
+                    str(spec.get("stroke_color", spec.get("color", fill))),
+                )
+            )
+
+        fill_image = spec.get("fill_image")
+        if fill_image:
+            material_path = Path(str(fill_image))
+            if not material_path.is_absolute():
+                material_path = layout_path.parent / material_path
+            if not material_path.exists():
+                raise FileNotFoundError(f"Character fill image not found: {material_path}")
+            with Image.open(material_path) as material_source:
+                material = material_source.convert("RGBA")
+            crop = spec.get("fill_crop")
+            if isinstance(crop, list) and len(crop) == 4:
+                left, top, right, bottom = (float(value) for value in crop)
+                if not (0 <= left < right <= 1 and 0 <= top < bottom <= 1):
+                    raise ValueError("fill_crop values must define a normalized 0..1 box")
+                material = material.crop(
+                    (
+                        round(left * material.width),
+                        round(top * material.height),
+                        round(right * material.width),
+                        round(bottom * material.height),
+                    )
+                )
+            centering = spec.get("fill_position", [0.5, 0.5])
+            if not isinstance(centering, list) or len(centering) != 2:
+                raise ValueError("fill_position must be [x, y]")
+            material = ImageOps.fit(
+                material,
+                glyph_size,
+                method=Image.Resampling.LANCZOS,
+                centering=(float(centering[0]), float(centering[1])),
+            )
+            material.putalpha(
+                ImageChops.multiply(material.getchannel("A"), glyph_mask)
+            )
+            glyph.alpha_composite(material)
+        else:
+            glyph.alpha_composite(
+                colorize_mask(glyph_mask, str(spec.get("color", fill)))
+            )
+
+        opacity = max(0.0, min(1.0, float(spec.get("opacity", 1.0))))
+        if opacity < 1:
+            glyph.putalpha(glyph.getchannel("A").point(lambda value: round(value * opacity)))
+
         rotation = float(spec.get("rotation", 0))
         if rotation:
             glyph = glyph.rotate(rotation, resample=Image.Resampling.BICUBIC, expand=True)
@@ -373,8 +439,7 @@ def apply_stroke_architecture_effect(
 
 def apply_negative_window_effect(
     layer: Image.Image,
-    strength: float,
-    seed: int,
+    block: dict,
 ) -> Image.Image:
     bbox = layer.getbbox()
     if bbox is None:
@@ -384,6 +449,35 @@ def apply_negative_window_effect(
     text_height = y1 - y0
     mask = layer.getchannel("A")
     mask_draw = ImageDraw.Draw(mask)
+    strength = float(block.get("effect_strength", 0.008))
+    seed = int(block.get("effect_seed", 0))
+    windows = block.get("effect_windows")
+
+    if isinstance(windows, list) and windows:
+        for window in windows:
+            if not isinstance(window, dict):
+                raise ValueError("Each effect_windows item must be an object")
+            center_x = x0 + round(float(window.get("x", 0.5)) * text_width)
+            center_y = y0 + round(float(window.get("y", 0.5)) * text_height)
+            window_width = max(1, round(float(window.get("width", 0.16)) * text_width))
+            window_height = max(1, round(float(window.get("height", 0.5)) * text_height))
+            bounds = (
+                center_x - window_width // 2,
+                center_y - window_height // 2,
+                center_x + window_width // 2,
+                center_y + window_height // 2,
+            )
+            shape = str(window.get("shape", "rectangle"))
+            if shape == "ellipse":
+                mask_draw.ellipse(bounds, fill=0)
+            elif shape == "rectangle":
+                mask_draw.rectangle(bounds, fill=0)
+            else:
+                raise ValueError(f"Unsupported negative-window shape: {shape}")
+        result = layer.copy()
+        result.putalpha(mask)
+        return result
+
     rng = random.Random(seed)
     window_count = max(1, min(4, round(text_width / max(1, text_height))))
     window_width = max(3, round(text_height * max(0.08, strength * 10)))
@@ -413,6 +507,76 @@ def apply_negative_window_effect(
             )
     result = layer.copy()
     result.putalpha(mask)
+    return result
+
+
+def apply_interrupt_cut_effect(
+    layer: Image.Image,
+    block: dict,
+) -> Image.Image:
+    bbox = layer.getbbox()
+    if bbox is None:
+        return layer
+    x0, y0, x1, y1 = bbox
+    text_width = x1 - x0
+    text_height = y1 - y0
+    position = block.get("effect_position", [0.5, 0.5])
+    if not isinstance(position, list) or len(position) != 2:
+        raise ValueError("effect_position must be [x, y]")
+    center_x = x0 + round(float(position[0]) * text_width)
+    center_y = y0 + round(float(position[1]) * text_height)
+    angle = float(block.get("effect_angle", 0))
+    radians = math.radians(angle)
+    line_length = max(text_width, text_height) * 2
+    delta_x = round(line_length * math.cos(radians))
+    delta_y = round(line_length * math.sin(radians))
+    cut_width = max(1, round(layer.width * float(block.get("effect_strength", 0.006))))
+    mask = layer.getchannel("A")
+    ImageDraw.Draw(mask).line(
+        (
+            center_x - delta_x,
+            center_y - delta_y,
+            center_x + delta_x,
+            center_y + delta_y,
+        ),
+        fill=0,
+        width=cut_width,
+    )
+    result = layer.copy()
+    result.putalpha(mask)
+    return result
+
+
+def apply_relief_press_effect(
+    layer: Image.Image,
+    block: dict,
+) -> Image.Image:
+    if layer.getbbox() is None:
+        return layer
+    depth = max(1, round(layer.width * float(block.get("effect_strength", 0.003))))
+    alpha = layer.getchannel("A")
+    highlight = colorize_mask(
+        alpha,
+        str(block.get("effect_highlight", "#F7F2E7")),
+    )
+    shadow = colorize_mask(
+        alpha,
+        str(block.get("effect_color", "#6E675E")),
+    )
+    fill_opacity = max(
+        0.0,
+        min(1.0, float(block.get("effect_fill_opacity", 0.28))),
+    )
+    pressed_fill = layer.copy()
+    pressed_fill.putalpha(
+        pressed_fill.getchannel("A").point(
+            lambda value: round(value * fill_opacity)
+        )
+    )
+    result = Image.new("RGBA", layer.size, (0, 0, 0, 0))
+    result.alpha_composite(shifted_layer(highlight, -depth, -depth))
+    result.alpha_composite(shifted_layer(shadow, depth, depth))
+    result.alpha_composite(pressed_fill)
     return result
 
 
@@ -457,7 +621,11 @@ def apply_title_effect(layer: Image.Image, block: dict) -> Image.Image:
     if effect == "stroke_architecture":
         return apply_stroke_architecture_effect(layer, strength)
     if effect == "negative_window":
-        return apply_negative_window_effect(layer, strength, seed)
+        return apply_negative_window_effect(layer, block)
+    if effect == "interrupt_cut":
+        return apply_interrupt_cut_effect(layer, block)
+    if effect == "relief_press":
+        return apply_relief_press_effect(layer, block)
     if effect == "mirror_fade":
         return apply_mirror_fade_effect(layer, strength)
     if effect:
