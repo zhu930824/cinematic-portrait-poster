@@ -11,7 +11,8 @@ Use this reference when the film title must act as image, structure, or metaphor
 5. Text reserve
 6. Structural operations
 7. Script controls
-8. Quality checks
+8. Native-title prompt controls
+9. Quality checks
 
 ## Research synthesis
 
@@ -52,6 +53,8 @@ Do not shorten, paraphrase, or rewrite an official film title merely to make the
 - Use an abbreviated campaign title only when the user supplies or approves it.
 - If an approved shorthand is used, keep the full official title elsewhere in the final poster.
 - Keep credits and factual copy deterministic. Do not ask the image model to generate final billing.
+
+Choose the H1 production route using `image-native-title-workflow.md`. An accepted native title must be generated inside the poster plate, checked character by character, and left unobscured. A deterministic title must remain editable. Never hide a wrong generated title under a correct overlay.
 
 ## Title composition card
 
@@ -201,6 +204,25 @@ Single-interruption example:
 
 `dx`, `dy`, and `stroke_width` are fractions of poster width. `fill_crop` is a normalized box inside the source image. Repeat the last `character_layout` object when the title contains more characters than the array.
 
+## Native-title prompt controls
+
+For Native expressive or Native controlled, specify all of the following in the image prompt:
+
+- exact Chinese title in quotation marks near the beginning;
+- exact character count and order;
+- glyph skeleton: sourced calligraphic sample, Song/Ming, or Heiti;
+- title role: frame, mask, threshold, specimen, trace, interruption, or label;
+- dominant axis and approximate title field;
+- per-character scale or baseline rhythm when meaningful;
+- one material-specific title action;
+- one evidence-title relationship;
+- at most two text zones;
+- no pseudo-Chinese, question marks, substitutions, duplicated title, or invented microtype.
+
+Do not use “creative Chinese font” as an instruction. Describe visible stroke weight, spacing, contour, crop, texture, material, and interaction.
+
+If the generated H1 is wrong, regenerate with fewer text zones and a clearer title field. After two failures, switch to Deterministic exact and remove the incorrect generated title from the source plate.
+
 ## Quality checks
 
 - At thumbnail size, the title must contribute one clear mass or axis.
@@ -212,6 +234,8 @@ Single-interruption example:
 - Removing the title must weaken the composition.
 - Replacing the title with another film name must break the concept.
 - Distortion must not create a wrong character or uncertain title reading.
+- A native title has been checked character by character and contains no question mark, false radical, repeated title, or pseudo-character.
+- A wrong native title was regenerated rather than covered by post-added text.
 - The official film title has not been shortened without approval.
 - A series does not repeat the same title mechanism automatically.
 - Credits must remain typographically calm; expressive treatment belongs mainly to the title.

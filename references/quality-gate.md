@@ -24,6 +24,9 @@
 ## Typography and facts
 
 - Does the final poster visibly contain the exact film title?
+- Is the title-production route recorded as Native expressive, Native controlled, or Deterministic exact?
+- For a native title, were every character, order, language variant, punctuation mark, false radical, and duplicate checked at full size?
+- If the native title failed, was it regenerated instead of hidden beneath an ordinary overlay?
 - Does the title participate in the composition rather than sit in an arbitrary leftover corner?
 - Does the title use one story-grounded action rather than several decorative effects?
 - Is there one observable primary material or evidence field?
@@ -33,13 +36,16 @@
 - Has the exact official title been preserved unless an alternate campaign title was explicitly approved?
 - In a series, does the title mechanism avoid repeating either of the two previous structures?
 - Does the final poster contain verified director and principal-cast credits, plus the screenwriter when reliably available?
+- Do creator, cast, and compact credit groups form an intentional secondary hierarchy rather than one tiny afterthought?
+- Do the credit groups share an axis, edge, rail, horizon, or alignment with the title and primary motif?
+- If separate `creator_credit` or `verified_cast` groups are used, are they sourced and consistent with the mandatory `verified_credits` block?
 - Is the credit source recorded, and are names, roles, language variant, punctuation, and billing order accurate?
 - Are title, names, date, punctuation, and language variant exact?
 - Are all awards, laurels, logos, ratings, and credits supplied or verified?
 - Is every placeholder disclosed?
 - Does text remain inside the safe area and avoid important faces or motifs?
 - Was Chinese glyph coverage checked after font fallback?
-- Are both text-free key art and final typeset art retained?
+- Is either the text-free key art or accepted title-bearing poster plate retained alongside the final exact-copy poster?
 
 ## Delivery
 

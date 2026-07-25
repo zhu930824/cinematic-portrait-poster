@@ -23,6 +23,7 @@ Read only what the task needs:
 - Read [references/authored-reference-translation.md](references/authored-reference-translation.md) whenever the user names an artist, studio, campaign, poster, or visual reference.
 - Read [references/typography.md](references/typography.md) before adding real titles, credits, dates, or bilingual copy.
 - Read [references/title-design-patterns.md](references/title-design-patterns.md) when designing any expressive title, dominant title structure, material-filled glyph, custom character construction, or typography-led series.
+- Read [references/image-native-title-workflow.md](references/image-native-title-workflow.md) when the user asks for image-integrated Chinese typography, fantasy text treatment, editorial title fusion, title generation consistent with `oriental-editorial-poster`, or rejection of ordinary post-added fonts.
 - Read [references/quality-gate.md](references/quality-gate.md) before final delivery.
 
 ## Workflow
@@ -79,6 +80,8 @@ Make the concepts structurally different. For each provide:
 - why it belongs to this film;
 - spoiler risk: low, medium, or high.
 
+When `image-native-title-workflow.md` applies, first develop six title mechanisms privately and carry the strongest three into the three public poster concepts. Normally span A — evidence intervention, B — single evidence, and C — title structure. Treat these as title roles rather than fixed layouts; vary evidence role, title role, axis, crop logic, and reading path.
+
 Reject concepts that would fit many unrelated films after swapping only the title. In Standard mode, select the strongest direction using story relevance, silhouette clarity, emotional force, originality, campaign usefulness, and low spoiler risk.
 
 Before selecting, run a spectacle test: if the concept depends mainly on a dramatic pose, explosion, glow, or star likeness, rebuild it around a film-specific symbol.
@@ -104,6 +107,14 @@ Default format is a vertical 2:3 poster. Use 3:4 for social feeds and 9:16 for f
 
 ### 6. Compile the image prompt
 
+Choose the title-production route before writing the prompt:
+
+- **Native expressive**: short Chinese title generated as a designed image object with maximum fusion;
+- **Native controlled**: short or medium Chinese title generated inside a calmer complete poster plate;
+- **Deterministic exact**: text-free key art followed by exact editable composition.
+
+Default to Native controlled for a 1–4 character Chinese title when the user asks for expressive, material, fantasy, editorial, or image-integrated typography. Follow `references/image-native-title-workflow.md`. Keep the exact official film title; do not shorten it merely to improve generation.
+
 Write five compact paragraphs in this order:
 
 1. canvas, aspect ratio, surface, and intended poster function;
@@ -122,7 +133,11 @@ Scrub the prompt before generation:
 - ensure the primary metaphor can be stated in one sentence;
 - ensure at least four originality axes differ from any cited reference.
 
-Generate **text-free key art by default**, but compose it around an intentional title zone and a readable credit zone. Permit only abstract glyph-like marks when they are part of the image. Reserve exact Chinese titles, credits, dates, and billing for deterministic typesetting.
+For Native expressive or Native controlled, generate a complete title-bearing poster plate. Put the exact Chinese H1 near the start of the prompt, specify its character order, glyph skeleton, title role, scale rhythm, material action, and reserved field, and forbid substitutions, question marks, pseudo-characters, repeated titles, and invented microtext. Ask for at most two text zones.
+
+For Deterministic exact, generate text-free key art and reserve exact Chinese titles, credits, dates, and billing for deterministic typesetting.
+
+Never ask the image model to render credits, dates, legal lines, awards, ratings, logos, or provenance-sensitive copy.
 
 State whether the text reserve is low (12–22%), medium (25–38%), or high (40–55%) and name the exact content it supports. The open field must carry reading, silence, distance, pressure, or scale; it cannot be unexplained emptiness.
 
@@ -142,9 +157,11 @@ Use the built-in image-generation capability unless in Concept or Prompt-only mo
 
 Inspect the generated key art at full size and thumbnail size. Regenerate with one targeted correction when the main metaphor is missing, the silhouette collapses, text artifacts dominate, spectacle overwhelms meaning, culturally irrelevant decoration appears, or the result closely echoes a known poster.
 
-### 8. Typeset exact copy
+For a native title, inspect every character, character order, language variant, punctuation, false radical, duplicated stroke group, question mark, and accidental second title. If the H1 is wrong, do not cover it with conventional text. Simplify the title prompt and regenerate. After two failed native attempts, switch explicitly to Deterministic exact. Record the accepted title and validation method in `image_native_title`.
 
-Follow `references/typography.md`. Keep a text-free key-art file. Create a layout JSON from [assets/layout-example.json](assets/layout-example.json), then run:
+### 8. Finish exact copy
+
+Follow `references/typography.md`. Keep either the text-free key art or the accepted generated title-bearing poster plate. Create a layout JSON from [assets/layout-example.json](assets/layout-example.json), then run:
 
 ```powershell
 python scripts/compose_poster.py --background <key-art.png> --layout <layout.json> --output <poster.png> --final
@@ -152,19 +169,21 @@ python scripts/compose_poster.py --background <key-art.png> --layout <layout.jso
 
 For every Standard or Series poster:
 
-1. typeset the exact film title as a dominant designed element;
-2. make its axis, scale, spacing, color, and position complete the selected metaphor;
-3. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
+1. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
+2. for a native title, keep the accepted generated H1 and do not add a second title block;
+3. for a deterministic title, make its axis, scale, spacing, color, and position complete the selected metaphor;
 4. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
-5. use per-character construction, one selected material image, or one story-grounded effect when the title needs custom form;
+5. use per-character construction, one selected material image, or one story-grounded effect when a deterministic title needs custom form;
 6. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
 7. typeset a verified credit block containing at minimum the director and principal cast, plus the screenwriter when reliably available;
-8. keep credits subordinate but readable at full size;
-9. inspect title-motif interaction and credit legibility at both full size and thumbnail size.
+8. when space permits, split verified facts into a designed creator line, principal-cast rail, and compact credit block instead of one tiny afterthought;
+9. align credit groups to the title, motif, architectural edge, horizon, or dominant axis so removing them would weaken the finished poster hierarchy;
+10. keep credits subordinate but readable at full size;
+11. inspect title-motif interaction and credit legibility at both full size and thumbnail size.
 
 Prefer an explicitly supplied licensed font. The script can use common system fallbacks, but verify Chinese glyph coverage visually. Never fabricate names, roles, billing order, production companies, or a production billing block.
 
-Always use `--final` for the delivered poster. It rejects layouts missing `title` or `verified_credits` roles, common placeholder tokens, or a non-empty `credit_sources` list.
+Always use `--final` for the delivered poster. It accepts either an exact `title` block or a validated `image_native_title` record, and always requires `verified_credits`, a non-empty `credit_sources` list, and no common placeholder tokens.
 
 ### 9. Validate and deliver
 
@@ -174,7 +193,7 @@ Apply `references/quality-gate.md`. Return:
 2. three concepts and, outside Concept mode, the selected direction;
 3. visual recipe;
 4. outside Concept mode, the final image prompt and hard avoids;
-5. in Standard or Series mode, text-free key art;
+5. in Standard or Series mode, text-free key art or the accepted generated title-bearing poster plate;
 6. in Standard or Series mode, a typeset poster containing the integrated film title and verified cast-and-crew credits;
 7. a short design interpretation;
 8. any placeholders, factual uncertainties, font substitutions, or spoiler concerns.

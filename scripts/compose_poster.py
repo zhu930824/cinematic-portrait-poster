@@ -665,19 +665,58 @@ def iter_blocks(layout: dict) -> Iterable[dict]:
 def validate_final_copy(layout: dict) -> None:
     blocks = list(iter_blocks(layout))
     by_role = {str(block.get("role", "")): block for block in blocks}
-    missing = [role for role in ("title", "verified_credits") if role not in by_role]
+    native_title = layout.get("image_native_title")
+    has_native_title = isinstance(native_title, dict)
+    missing = [role for role in ("verified_credits",) if role not in by_role]
+    if "title" not in by_role and not has_native_title:
+        missing.insert(0, "title or image_native_title")
     if missing:
         raise ValueError(
             "Final poster layout is missing required role(s): " + ", ".join(missing)
         )
 
     forbidden = ("姓名", "片名", "PLACEHOLDER", "TBD", "20XX")
-    for role in ("title", "verified_credits"):
+    for role in ("verified_credits",):
         text = str(by_role[role]["text"]).strip()
         if not text:
             raise ValueError(f"Final poster {role} text is empty")
         if any(token.casefold() in text.casefold() for token in forbidden):
             raise ValueError(f"Final poster {role} still contains placeholder copy")
+
+    if "title" in by_role:
+        title_text = str(by_role["title"]["text"]).strip()
+        if not title_text:
+            raise ValueError("Final poster title text is empty")
+        if any(token.casefold() in title_text.casefold() for token in forbidden):
+            raise ValueError("Final poster title still contains placeholder copy")
+    else:
+        native_text = str(native_title.get("text", "")).strip()
+        if not native_text:
+            raise ValueError("image_native_title.text must contain the exact approved title")
+        if native_title.get("validated") is not True:
+            raise ValueError(
+                "image_native_title.validated must be true after full-size visual inspection"
+            )
+        if any(token.casefold() in native_text.casefold() for token in forbidden):
+            raise ValueError("image_native_title still contains placeholder copy")
+        validation_method = str(native_title.get("validation_method", "")).strip()
+        if not validation_method:
+            raise ValueError(
+                "image_native_title.validation_method must record how the title was checked"
+            )
+        production_mode = str(native_title.get("production_mode", "")).strip()
+        if production_mode not in {"native-expressive", "native-controlled"}:
+            raise ValueError(
+                "image_native_title.production_mode must be native-expressive or native-controlled"
+            )
+        title_treatment = str(native_title.get("title_treatment", "")).strip().upper()
+        if title_treatment not in {"A", "B", "C"}:
+            raise ValueError("image_native_title.title_treatment must be A, B, or C")
+        attempts = native_title.get("generation_attempts")
+        if not isinstance(attempts, int) or attempts < 1:
+            raise ValueError(
+                "image_native_title.generation_attempts must be a positive integer"
+            )
 
     sources = layout.get("credit_sources")
     if not isinstance(sources, list) or not any(
