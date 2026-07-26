@@ -7,12 +7,14 @@ Use this reference when the film title must act as image, structure, or metaphor
 1. Research synthesis
 2. Film-title fidelity
 3. Title composition card
-4. Semantic mechanism gate
-5. Text reserve
-6. Structural operations
-7. Script controls
-8. Native-title prompt controls
-9. Quality checks
+4. Title-image contract
+5. Semantic mechanism gate
+6. Glyph sourcing and controlled variables
+7. Text reserve
+8. Structural operations
+9. Script controls
+10. Native-title prompt controls
+11. Quality checks
 
 ## Research synthesis
 
@@ -63,16 +65,60 @@ Before choosing an effect, record:
 | Field | Requirement |
 |---|---|
 | Film core | One dramatic proposition or emotional conflict |
+| Title strategy | Edge monument, quiet catalogue, split inscription, type specimen, object label, text field, or another film-specific structure |
 | Primary evidence | One object, material, trace, gesture, space, or weather event |
 | Material fact | One observable trait: fold, fracture, fiber, reflection, weight, stain, weave, edge, shadow, or residue |
 | Semantic pivot | How that trait changes the meaning of the title |
+| Title role | Frame, mask, threshold, specimen, trace, interruption, label, architecture, or counterweight |
+| Image role | Evidence, field, crop, trace, object, atmosphere, or passage |
+| Shared boundary | The exact edge, axis, opening, horizon, contour, light band, or material transition used by both title and image |
+| Mutual change | State separately how the title changes the image and how the image changes the title |
+| Glyph skeleton | Licensed display face, sourced calligraphic sample, Song/Ming, or Heiti |
+| Controlled variables | At least two visible variables beyond font choice |
 | Title action | One verb: contain, interrupt, reflect, press, split, suspend, erode, bind, measure, or reveal |
 | Dominant axis | Vertical, horizontal, diagonal, radial, or edge pressure |
+| Title field | A planned normalized rectangle or structural path established before key-art generation |
+| Collision rule | What the title may cross, touch, mask, frame, or never cover |
 | Text reserve | Low, medium, or high; name the exact content it holds |
 | Interruptor | Optional single line, edge, thread, waterline, crack, or color event |
 | Palette | Source-led neutrals plus at most one decisive accent |
 | Beauty engine | Material, light, crop pressure, rhythm, or color tension that works before the title is read |
 | Post-view reward | The relationship that becomes clearer after watching the film |
+| Removal test | What balance, direction, passage, or meaning collapses when the title is hidden |
+| Swap test | Why another film title cannot occupy the same structure unchanged |
+| Legibility test | How exact characters remain readable at thumbnail and full size |
+
+## Title-image contract
+
+Design the title and key art in the same planning pass. Do not generate a complete illustration and later search for unused space.
+
+Require a two-way relationship:
+
+1. **Title changes image** — the title must alter at least one of crop, negative space, focal balance, scale, passage, horizon, silhouette, or reading path.
+2. **Image changes title** — the motif must alter at least one of contour, stroke visibility, material, spacing, baseline, color, fill, or character scale.
+
+Define a `shared_boundary` before generation. It may be a doorway edge, rain line, orbit, wall seam, garment fold, field marking, reflection plane, shadow edge, or another film-evidenced structure. Both the title and image must respond to it.
+
+Define a `title_field` before generation:
+
+```json
+{
+  "x": 0.08,
+  "y": 0.12,
+  "width": 0.52,
+  "height": 0.34
+}
+```
+
+The field is a compositional footprint, not a generic blank rectangle. Key art must create the pressure, opening, edge, light, or counterweight that makes this location necessary. For a path-based or edge-cropped title, use the rectangle as its safe envelope and describe the actual path in `shared_boundary`.
+
+Reject the design when:
+
+- the same title block can move to another corner without changing the poster;
+- the title overlaps the image but neither changes the other;
+- the image is already compositionally complete without the declared title field;
+- the title depends only on a decorative font or texture preset;
+- the shared boundary has no film evidence.
 
 ## Semantic mechanism gate
 
@@ -99,6 +145,32 @@ Score each mechanism from 1–5:
 Reject a mechanism when `Story inevitability`, `Formal beauty`, or `Legibility` scores below 4. Reject it when the same treatment works unchanged after replacing the title with a random noun.
 
 Hide the title mentally for one second. If the remaining visual has no material, light, rhythm, or emotional pull, the concept is a diagram rather than a poster. Keep the semantic pivot but rebuild the image language.
+
+## Glyph sourcing and controlled variables
+
+Choose the glyph skeleton in this order:
+
+1. an explicitly supplied licensed title treatment or font;
+2. a traceable, rights-compatible calligraphic character sample used as an anchor;
+3. a licensed Song/Ming or Heiti skeleton;
+4. a system fallback with verified Chinese coverage.
+
+When using sampled calligraphy, record the source page, script, attribution when available, and selected character. Preserve the recognizable skeleton and natural stroke logic. Do not ask an image model to invent a named calligrapher's hand.
+
+Make design intent visible through at least two controlled variables:
+
+- scale contrast between characters or semantic word groups;
+- baseline or vertical-position shift;
+- deliberate tracking compression or expansion;
+- stroke crop or edge pressure;
+- solid/outline contrast;
+- selected-stroke material fill;
+- color or opacity hierarchy;
+- orientation or axis tension;
+- one evidence-led interruption;
+- one meaningful line break or semantic split.
+
+Font family alone does not count. Applying the same texture to every character counts as one variable, not several. Do not stretch glyphs; change size, tracking, layout, or construct individual characters instead.
 
 ## Text reserve
 
@@ -216,6 +288,9 @@ For Native expressive or Native controlled, specify all of the following in the 
 - per-character scale or baseline rhythm when meaningful;
 - one material-specific title action;
 - one evidence-title relationship;
+- the shared boundary and both directions of mutual change;
+- the planned title field and collision rule;
+- at least two controlled variables beyond font choice;
 - at most two text zones;
 - no pseudo-Chinese, question marks, substitutions, duplicated title, or invented microtype.
 
@@ -232,6 +307,10 @@ If the generated H1 is wrong, regenerate with fewer text zones and a clearer tit
 - The text reserve has a named job.
 - The poster remains visually desirable when the title is mentally hidden.
 - Removing the title must weaken the composition.
+- The title changes the image and the image changes the title in separately describable ways.
+- A film-evidenced shared boundary is visible.
+- The key art anticipates the declared title field rather than leaving a generic empty corner.
+- At least two controlled variables are visible beyond font choice.
 - Replacing the title with another film name must break the concept.
 - Distortion must not create a wrong character or uncertain title reading.
 - A native title has been checked character by character and contains no question mark, false radical, repeated title, or pseudo-character.

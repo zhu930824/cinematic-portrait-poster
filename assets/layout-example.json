@@ -23,16 +23,37 @@
   },
   "image_native_title": null,
   "title_design": {
+    "strategy": null,
+    "film_core": null,
     "primary_evidence": null,
     "material_fact": null,
     "semantic_pivot": null,
+    "title_role": null,
+    "image_role": null,
+    "shared_boundary": null,
+    "mutual_change": {
+      "title_changes_image": null,
+      "image_changes_title": null
+    },
+    "glyph_skeleton": null,
+    "controlled_variables": [],
     "title_action": null,
     "dominant_axis": null,
+    "title_field": {
+      "x": null,
+      "y": null,
+      "width": null,
+      "height": null
+    },
+    "collision_rule": null,
     "text_reserve": "medium",
     "text_reserve_job": null,
     "interruptor": null,
     "beauty_engine": null,
-    "post_view_reward": null
+    "post_view_reward": null,
+    "removal_test": null,
+    "swap_test": null,
+    "legibility_test": null
   },
   "text_blocks": [
     {

@@ -92,10 +92,14 @@ extra characters, question marks, pseudo-Chinese marks, or repeated title.
 Then specify visible construction:
 
 - title role in the composition;
+- image role and the exact boundary shared with the title;
+- how the title changes crop, balance, passage, or reading path;
+- how the image changes title contour, material, spacing, baseline, or visibility;
 - horizontal, vertical, diagonal, radial, or edge-pressure axis;
-- approximate title area and crop pressure;
+- normalized title field or safe envelope and its crop pressure;
+- collision rule: what the title may cross, touch, frame, mask, or never cover;
 - solid, outline, sampled glyph, Song/Ming, Heiti, or sourced calligraphic skeleton;
-- per-character scale and baseline rhythm when meaningful;
+- at least two controlled variables beyond font choice, such as character scale, baseline rhythm, tracking, stroke crop, outline/solid contrast, selected-stroke material, or semantic line break;
 - one material-specific title action;
 - one evidence-title relationship;
 - maximum of two title/copy zones;
@@ -134,6 +138,9 @@ Verify:
 - punctuation and spacing;
 - no question mark, false radical, duplicated stroke group, pseudo-character, or accidental second title;
 - title-motif relationship;
+- visible two-way dependence between title and image;
+- the declared shared boundary and collision rule;
+- at least two controlled variables beyond font choice;
 - title legibility at thumbnail size.
 
 If the H1 is wrong:
@@ -176,7 +183,9 @@ When the main title already exists and has been checked in the generated poster 
     "validation_method": "full-size visual inspection",
     "production_mode": "native-controlled",
     "title_treatment": "B",
-    "generation_attempts": 1
+    "generation_attempts": 1,
+    "shared_boundary_verified": true,
+    "mutual_change_verified": true
   },
   "credit_sources": [
     "https://example.com/verified-film-source"

@@ -47,11 +47,18 @@
 - For a native title, were every character, order, language variant, punctuation mark, false radical, and duplicate checked at full size?
 - If the native title failed, was it regenerated instead of hidden beneath an ordinary overlay?
 - Does the title participate in the composition rather than sit in an arbitrary leftover corner?
+- Was the title field planned before key-art generation, and does the image visibly create pressure, an opening, an edge, light, or a counterweight for it?
+- Does `title_design` name a title role, image role, and film-evidenced shared boundary?
+- Can you state separately how the title changes the image and how the image changes the title?
+- Are at least two controlled variables visible beyond the selected font family?
+- Does the collision rule protect faces and critical motifs while defining one intentional touch, crossing, frame, mask, or interruption?
 - Does the title use one story-grounded action rather than several decorative effects?
 - Is there one observable primary material or evidence field?
 - Does the text reserve have a named purpose rather than behaving as unexplained emptiness?
 - Does the poster remain visually compelling when the title is mentally hidden?
 - Would the title mechanism fail if moved unchanged to an unrelated film?
+- Would hiding the title weaken balance, direction, passage, or meaning in the specific way recorded by the removal test?
+- Would replacing it with another film name break the structure in the specific way recorded by the swap test?
 - Has the exact official title been preserved unless an alternate campaign title was explicitly approved?
 - In a series, does the title mechanism avoid repeating either of the two previous structures?
 - Does the final poster contain verified director and principal-cast credits, plus the screenwriter when reliably available?

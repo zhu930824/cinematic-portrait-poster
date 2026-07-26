@@ -30,7 +30,7 @@ The title must dominate or co-dominate with the primary motif. Credits remain su
 
 ## Integrate the title
 
-Plan the title while designing the image, not after generating it. Reserve its space in the key-art prompt and make it participate through one or more of:
+Plan the title while designing the image, not after generating it. Complete the `title_design` contract from `title-design-patterns.md` before writing the key-art prompt. Reserve a necessary title field and make the title participate through one or more of:
 
 - sharing the scene's main axis;
 - completing or interrupting the motif's contour;
@@ -41,7 +41,9 @@ Plan the title while designing the image, not after generating it. Reserve its s
 
 Keep the exact official title in every route. In a native route, state the exact H1 near the start of the prompt and reject any wrong character rather than covering it with a conventional title. In a deterministic route, typeset exact letters after image generation. Reject a layout when the title can move to an arbitrary corner without weakening the composition.
 
-When font selection alone cannot express the film, read `title-design-patterns.md`. Reconstruct the title through scale, position, negative space, outline, reflection, or material logic. Preserve legibility; expressive typography is a narrative structure, not arbitrary distortion.
+Require two-way dependence. State how the title changes the image's crop, balance, passage, scale, or reading path, then state how the image changes the title's contour, material, spacing, baseline, or visibility. Both must share one film-evidenced boundary such as a seam, horizon, reflection plane, doorway, garment fold, orbit, field marking, or light edge.
+
+Reconstruct the title through scale, position, negative space, outline, reflection, or material logic. Use at least two controlled variables beyond font family: scale contrast, baseline shift, tracking, stroke crop, solid/outline contrast, selected-stroke material, color hierarchy, orientation, or semantic line break. Preserve legibility; expressive typography is a narrative structure, not arbitrary distortion.
 
 Do not import editorial-cover title shortening into theatrical film titles. Keep the exact approved film title. Refine it through line breaks, scale groups, semantic zones, or secondary campaign copy instead of deleting official words.
 
@@ -81,6 +83,8 @@ Follow `credit-typography.md`. Reserve 12–22% of the poster, require `creator_
 - Record any system-font substitution.
 - When using sourced calligraphy, record the source, script, attribution when available, and selected character. Preserve the source skeleton.
 - Without reliable calligraphy samples, use Song/Ming or Heiti. Do not request generic synthetic brush lettering.
+- Use one sourced calligraphic character as an anchor when appropriate; keep the remaining factual title skeleton exact and compatible rather than mixing unrelated hands casually.
+- Require at least two visible controlled variables beyond font choice, but no more than one story-grounded title action.
 - Verify simplified/traditional Chinese choice, punctuation, capitalization, names, and dates.
 - Preserve safe margins of at least 7%; use 10% for uncertain crops.
 - Do not stretch fonts. Adjust size, tracking, or line breaks.
@@ -114,4 +118,4 @@ Use `"effect": "rain_canopy"` when rain, shelter, growth, or forest protection i
 
 Additional structural effects are documented in `title-design-patterns.md`: `stroke_architecture`, `negative_window`, `interrupt_cut`, `relief_press`, `outline_echo`, and `mirror_fade`. Use `effect_windows` for one precise negative-space opening. Use `character_layout` for per-character scale, offset, rotation, color, opacity, stroke, or a traceable `fill_image`. Combine no more than one structural effect with one story-grounded material treatment.
 
-Export delivered posters with `compose_poster.py --final`. The final-copy check requires either a `title` block or a validated `image_native_title` record; all three credit roles; a valid `credit_design` record; a non-empty `credit_sources` array; readable font floors; and no common placeholder tokens.
+Export delivered posters with `compose_poster.py --final`. The final-copy check requires either a `title` block or a validated `image_native_title` record; a complete `title_design` contract with a normalized title field, two-way dependence, at least two controlled variables, and removal/swap/legibility tests; all three credit roles; a valid `credit_design` record; a non-empty `credit_sources` array; readable font floors; and no common placeholder tokens.

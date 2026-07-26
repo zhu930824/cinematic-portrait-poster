@@ -25,7 +25,7 @@ Read only what the task needs:
 - Read [references/authored-reference-translation.md](references/authored-reference-translation.md) whenever the user names an artist, studio, campaign, poster, or visual reference.
 - Read [references/typography.md](references/typography.md) before adding real titles, credits, dates, or bilingual copy.
 - Read [references/credit-typography.md](references/credit-typography.md) for every Standard or Series poster before reserving space or composing verified names.
-- Read [references/title-design-patterns.md](references/title-design-patterns.md) when designing any expressive title, dominant title structure, material-filled glyph, custom character construction, or typography-led series.
+- Always read [references/title-design-patterns.md](references/title-design-patterns.md) for Standard or Series work. Use it to establish the title-image contract before key-art generation, even when the final title will be typeset deterministically.
 - Read [references/image-native-title-workflow.md](references/image-native-title-workflow.md) when the user asks for image-integrated Chinese typography, fantasy text treatment, editorial title fusion, title generation consistent with `oriental-editorial-poster`, or rejection of ordinary post-added fonts.
 - Read [references/quality-gate.md](references/quality-gate.md) before final delivery.
 
@@ -67,7 +67,8 @@ Follow `references/art-direction-routing.md`:
 2. choose one primary direction lane because the film requires it;
 3. select one symbolic-compression pattern;
 4. choose a ground and image-making process from `material-palette-routing.md`, then state their story evidence and difference from recent outputs;
-5. set a visible complexity budget: one focal point, one primary metaphor, no more than three major narrative masses, one close-read reward, and at most one interruptor.
+5. establish the title-image contract from `title-design-patterns.md`: title role, image role, shared boundary, title field, glyph skeleton, two controlled variables, and the way title and image alter each other;
+6. set a visible complexity budget: one focal point, one primary metaphor, no more than three major narrative masses, one close-read reward, and at most one interruptor.
 
 Do not select a named style. A direction must remain understandable after every artist and studio name is removed.
 
@@ -92,7 +93,8 @@ Make the concepts structurally different. For each provide:
 - primary motif and metaphor operation;
 - composition family, ground, story evidence, production process, palette roles, typography mode, title-integration behavior, and credit-block zone;
 - director-signature position, principal-cast rail, factual-base position, and their shared compositional axis;
-- title material fact, semantic pivot, one title action, text-reserve level, and beauty engine;
+- title strategy, title role, image role, shared boundary, title field, glyph skeleton, two controlled variables, material fact, semantic pivot, one title action, text-reserve level, and beauty engine;
+- how the title changes the image and how the image changes the title;
 - why the title mechanism cannot be moved unchanged to an unrelated film;
 - why it belongs to this film;
 - spoiler risk: low, medium, or high.
@@ -105,7 +107,7 @@ Reject concepts that would fit many unrelated films after swapping only the titl
 
 Before selecting, run a spectacle test: if the concept depends mainly on a dramatic pose, explosion, glow, or star likeness, rebuild it around a film-specific symbol.
 
-Run a title test: if the title could be moved anywhere without changing the composition, redesign its scale, axis, interruption, containment, alignment, or material echo. The title must participate in the visual system without asking the image model to draw the final letters.
+Run a title test: if the title could be moved anywhere without changing the composition, redesign the title field and shared boundary before generation. State both directions of dependence: how the title changes crop, balance, passage, scale, or reading path; and how the motif changes the title's contour, material, spacing, baseline, or visibility. Require at least two controlled variables beyond font choice. The title must participate in the visual system whether it is native or deterministic.
 
 Run the semantic mechanism gate in `references/title-design-patterns.md`. Reject a title direction when its story inevitability, formal beauty, or legibility scores below 4/5. Use one primary evidence field, one title action, and at most one interruptor. Mentally hide the title for one second; if the remaining image has no sensory or emotional pull, rebuild the image language.
 
@@ -118,6 +120,8 @@ format / design thesis / direction lane / composition family /
 symbolic-compression pattern / metaphor operation / primary motif /
 scale relation / ground / story evidence / material process /
 palette roles / recent-output delta / title behavior /
+title role / image role / shared boundary / title field /
+glyph skeleton / controlled variables / mutual change /
 title action / text reserve / interruptor / beauty engine /
 credit behavior / emotional temperature
 ```
@@ -160,7 +164,7 @@ Scrub the prompt before generation:
 
 For Native expressive or Native controlled, generate a complete title-bearing poster plate. Put the exact Chinese H1 near the start of the prompt, specify its character order, glyph skeleton, title role, scale rhythm, material action, and reserved field, and forbid substitutions, question marks, pseudo-characters, repeated titles, and invented microtext. Ask for at most two text zones.
 
-For Deterministic exact, generate text-free key art and reserve exact Chinese titles, credits, dates, and billing for deterministic typesetting.
+For Deterministic exact, generate text-free key art whose crop, negative space, motif edge, light, or architecture already anticipates the declared title field and shared boundary. Reserve exact Chinese titles, credits, dates, and billing for deterministic typesetting; do not accept a generic empty corner as title integration.
 
 Never ask the image model to render credits, dates, legal lines, awards, ratings, logos, or provenance-sensitive copy.
 
@@ -202,22 +206,23 @@ For every Standard or Series poster:
 2. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
 3. for a native title, keep the accepted generated H1 and do not add a second title block;
 4. for a deterministic title, make its axis, scale, spacing, color, and position complete the selected metaphor;
-5. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
-6. use per-character construction, one selected material image, or one story-grounded effect when a deterministic title needs custom form;
-7. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
-8. reserve 12–22% of the full poster for the complete cast-and-crew system; the reserve may be distributed across the composition;
-9. create all three required roles from verified facts: `creator_credit`, `verified_cast`, and `verified_credits`;
-10. treat `creator_credit` as an authored signature or counterweight, `verified_cast` as a prominent name rail, and `verified_credits` as the compact factual base; never make the bottom block the only readable occurrence of the director or principal cast;
-11. make the groups participate through one primary mechanism from `references/credit-typography.md`, sharing an axis, rail, counterweight, threshold, scale rhythm, material cue, or evidence structure with the title and motif;
-12. set `credit_design.primary_axis`, `reserved_area`, `participation`, `creator_function`, `cast_function`, `credits_function`, and `removal_test` in the layout JSON; describe visible relationships rather than writing “integrated with the design”;
-13. keep `creator_credit` at least 1.4%, `verified_cast` at least 1.5%, and `verified_credits` at least 1.25% of poster width; both creator and cast must be larger than the factual base, with larger sizes preferred for mobile delivery;
-14. add meaningful line breaks or enlarge the reserve instead of shrinking names below the readable floor;
-15. hide the director signature and cast rail separately; if neither removal weakens balance, direction, rhythm, or authorship, redesign their placement;
-16. inspect title-motif interaction, surface specificity, palette difference, and credit legibility at thumbnail, phone, and full size.
+5. complete `title_design` in the layout JSON, including title strategy, film core, title role, image role, shared boundary, mutual change, title field, glyph skeleton, at least two controlled variables, collision rule, removal test, swap test, and legibility test;
+6. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
+7. use per-character construction, one selected material image, or one story-grounded effect when a deterministic title needs custom form;
+8. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
+9. reserve 12–22% of the full poster for the complete cast-and-crew system; the reserve may be distributed across the composition;
+10. create all three required roles from verified facts: `creator_credit`, `verified_cast`, and `verified_credits`;
+11. treat `creator_credit` as an authored signature or counterweight, `verified_cast` as a prominent name rail, and `verified_credits` as the compact factual base; never make the bottom block the only readable occurrence of the director or principal cast;
+12. make the groups participate through one primary mechanism from `references/credit-typography.md`, sharing an axis, rail, counterweight, threshold, scale rhythm, material cue, or evidence structure with the title and motif;
+13. set `credit_design.primary_axis`, `reserved_area`, `participation`, `creator_function`, `cast_function`, `credits_function`, and `removal_test` in the layout JSON; describe visible relationships rather than writing “integrated with the design”;
+14. keep `creator_credit` at least 1.4%, `verified_cast` at least 1.5%, and `verified_credits` at least 1.25% of poster width; both creator and cast must be larger than the factual base, with larger sizes preferred for mobile delivery;
+15. add meaningful line breaks or enlarge the reserve instead of shrinking names below the readable floor;
+16. hide the director signature and cast rail separately; if neither removal weakens balance, direction, rhythm, or authorship, redesign their placement;
+17. inspect title-motif interaction, surface specificity, palette difference, and credit legibility at thumbnail, phone, and full size.
 
 Prefer an explicitly supplied licensed font. The script can use common system fallbacks, but verify Chinese glyph coverage visually. Never fabricate names, roles, billing order, production companies, or a production billing block.
 
-Always use `--final` for the delivered poster. It accepts either an exact `title` block or a validated `image_native_title` record, and requires a consistent `surface_design` declaration, the three credit roles, an explicit role-by-role `credit_design` record with a removal test, a non-empty `credit_sources` list, readable hierarchy, minimum sizes, and no common placeholder tokens.
+Always use `--final` for the delivered poster. It accepts either an exact `title` block or a validated `image_native_title` record, and requires a complete title-image contract, a consistent `surface_design` declaration, the three credit roles, an explicit role-by-role `credit_design` record with a removal test, a non-empty `credit_sources` list, readable hierarchy, minimum sizes, and no common placeholder tokens.
 
 ### 10. Validate and deliver
 

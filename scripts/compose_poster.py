@@ -693,6 +693,86 @@ def iter_blocks(layout: dict) -> Iterable[dict]:
         yield block
 
 
+def validate_title_design(layout: dict) -> None:
+    """Require a planned, two-way relationship between the title and key art."""
+    title_design = layout.get("title_design")
+    if not isinstance(title_design, dict):
+        raise ValueError("Final poster layout requires a title_design record")
+
+    required_text_fields = (
+        "strategy",
+        "film_core",
+        "primary_evidence",
+        "material_fact",
+        "semantic_pivot",
+        "title_role",
+        "image_role",
+        "shared_boundary",
+        "glyph_skeleton",
+        "title_action",
+        "dominant_axis",
+        "collision_rule",
+        "text_reserve",
+        "text_reserve_job",
+        "beauty_engine",
+        "post_view_reward",
+        "removal_test",
+        "swap_test",
+        "legibility_test",
+    )
+    missing = [
+        key
+        for key in required_text_fields
+        if not str(title_design.get(key) or "").strip()
+    ]
+    if missing:
+        raise ValueError("title_design is missing: " + ", ".join(missing))
+
+    reserve = str(title_design["text_reserve"]).strip().casefold()
+    if reserve not in {"low", "medium", "high"}:
+        raise ValueError("title_design.text_reserve must be low, medium, or high")
+
+    mutual_change = title_design.get("mutual_change")
+    if not isinstance(mutual_change, dict):
+        raise ValueError("title_design.mutual_change must be an object")
+    for key in ("title_changes_image", "image_changes_title"):
+        if not str(mutual_change.get(key) or "").strip():
+            raise ValueError(f"title_design.mutual_change.{key} must be non-empty")
+
+    controlled = title_design.get("controlled_variables")
+    if not isinstance(controlled, list):
+        raise ValueError("title_design.controlled_variables must be an array")
+    normalized_controlled = {
+        str(value).strip().casefold() for value in controlled if str(value).strip()
+    }
+    if len(normalized_controlled) < 2:
+        raise ValueError(
+            "title_design.controlled_variables requires at least two distinct "
+            "visible variables beyond font choice"
+        )
+
+    title_field = title_design.get("title_field")
+    if not isinstance(title_field, dict):
+        raise ValueError("title_design.title_field must be an object")
+    missing_field = [
+        key for key in ("x", "y", "width", "height") if title_field.get(key) is None
+    ]
+    if missing_field:
+        raise ValueError(
+            "title_design.title_field is missing: " + ", ".join(missing_field)
+        )
+    x = float(title_field["x"])
+    y = float(title_field["y"])
+    field_width = float(title_field["width"])
+    field_height = float(title_field["height"])
+    if not 0 <= x <= 1 or not 0 <= y <= 1:
+        raise ValueError("title_design.title_field x and y must be within 0..1")
+    if field_width <= 0 or field_height <= 0:
+        raise ValueError("title_design.title_field width and height must be positive")
+    if x + field_width > 1 or y + field_height > 1:
+        raise ValueError("title_design.title_field must remain inside the poster")
+
+
 def validate_final_copy(layout: dict) -> None:
     blocks = list(iter_blocks(layout))
     by_role = {str(block.get("role", "")): block for block in blocks}
@@ -706,6 +786,8 @@ def validate_final_copy(layout: dict) -> None:
         raise ValueError(
             "Final poster layout is missing required role(s): " + ", ".join(missing)
         )
+
+    validate_title_design(layout)
 
     surface_design = layout.get("surface_design")
     if not isinstance(surface_design, dict):
@@ -862,6 +944,16 @@ def validate_final_copy(layout: dict) -> None:
         if not isinstance(attempts, int) or attempts < 1:
             raise ValueError(
                 "image_native_title.generation_attempts must be a positive integer"
+            )
+        if native_title.get("shared_boundary_verified") is not True:
+            raise ValueError(
+                "image_native_title.shared_boundary_verified must be true after "
+                "checking the title-image boundary"
+            )
+        if native_title.get("mutual_change_verified") is not True:
+            raise ValueError(
+                "image_native_title.mutual_change_verified must be true after "
+                "checking two-way title-image dependence"
             )
 
     sources = layout.get("credit_sources")
