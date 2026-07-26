@@ -1,4 +1,4 @@
 interface:
   display_name: "Cinematic Portrait Poster"
-  short_description: "原创叙事海报、图像原生片名与演职员精排"
-  default_prompt: "Use $cinematic-portrait-poster to create an original vertical movie poster with an image-native or exact integrated title and verified cast-and-crew credits."
+  short_description: "电影叙事海报、非重复材质、创意片名与演职员设计"
+  default_prompt: "Use $cinematic-portrait-poster to create an original symbolic movie poster with a story-evidenced non-repetitive material and palette, a designed film title, a visible director signature, a readable principal-cast rail, verified compact credits, and a production-ready layout."

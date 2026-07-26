@@ -21,6 +21,23 @@ WINDOWS_FONT_CANDIDATES = (
     Path(r"C:\Windows\Fonts\arial.ttf"),
 )
 
+FINAL_CREDIT_ROLE_MIN_FONT_SIZES = {
+    "creator_credit": 0.014,
+    "verified_cast": 0.015,
+    "verified_credits": 0.0125,
+}
+
+PAPER_SURFACE_TERMS = (
+    "paper",
+    "parchment",
+    "kraft",
+    "newsprint",
+    "纸",
+    "羊皮纸",
+    "牛皮纸",
+    "新闻纸",
+)
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -64,6 +81,7 @@ def fit_font_to_width(
     size_px: int,
     tracking: int,
     image_width: int,
+    minimum_size_px: int = 8,
 ) -> ImageFont.FreeTypeFont:
     max_width = block.get("max_width")
     font = resolve_font(block, layout_path, size_px)
@@ -72,10 +90,15 @@ def fit_font_to_width(
 
     max_width_px = round(float(max_width) * image_width)
     lines = str(block["text"]).splitlines() or [""]
-    while font.size > 8 and any(
+    while font.size > minimum_size_px and any(
         tracked_width(draw, line, font, tracking) > max_width_px for line in lines
     ):
         font = resolve_font(block, layout_path, font.size - 1)
+    if any(tracked_width(draw, line, font, tracking) > max_width_px for line in lines):
+        raise ValueError(
+            f"Text for role {block.get('role', '<unassigned>')} cannot fit max_width "
+            f"without shrinking below the readable minimum"
+        )
     return font
 
 
@@ -646,6 +669,14 @@ def validate_block(block: dict, index: int) -> None:
             raise ValueError(f"Text block {index} has non-positive font_size")
     if "max_width" in block and not 0 < float(block["max_width"]) <= 1:
         raise ValueError(f"Text block {index} has max_width outside 0..1")
+    if "min_font_size" in block:
+        minimum = float(block["min_font_size"])
+        if minimum <= 0:
+            raise ValueError(f"Text block {index} has non-positive min_font_size")
+        if minimum > float(block["font_size"]):
+            raise ValueError(
+                f"Text block {index} min_font_size exceeds font_size"
+            )
     if "line_spacing" in block and float(block["line_spacing"]) <= 0:
         raise ValueError(f"Text block {index} has non-positive line_spacing")
     ImageColor.getrgb(block.get("color", "#111111"))
@@ -667,7 +698,8 @@ def validate_final_copy(layout: dict) -> None:
     by_role = {str(block.get("role", "")): block for block in blocks}
     native_title = layout.get("image_native_title")
     has_native_title = isinstance(native_title, dict)
-    missing = [role for role in ("verified_credits",) if role not in by_role]
+    credit_roles = ("creator_credit", "verified_cast", "verified_credits")
+    missing = [role for role in credit_roles if role not in by_role]
     if "title" not in by_role and not has_native_title:
         missing.insert(0, "title or image_native_title")
     if missing:
@@ -675,13 +707,127 @@ def validate_final_copy(layout: dict) -> None:
             "Final poster layout is missing required role(s): " + ", ".join(missing)
         )
 
+    surface_design = layout.get("surface_design")
+    if not isinstance(surface_design, dict):
+        raise ValueError("Final poster layout requires a surface_design record")
+    required_surface_fields = (
+        "ground",
+        "story_evidence",
+        "production_process",
+        "palette_logic",
+        "quiet_field",
+        "recent_output_delta",
+        "paper_based",
+        "paper_evidence",
+        "distressed",
+        "distress_evidence",
+    )
+    missing_surface_fields = [
+        key for key in required_surface_fields if key not in surface_design
+    ]
+    if missing_surface_fields:
+        raise ValueError(
+            "surface_design is missing: " + ", ".join(missing_surface_fields)
+        )
+    for key in (
+        "ground",
+        "story_evidence",
+        "production_process",
+        "palette_logic",
+        "quiet_field",
+        "recent_output_delta",
+    ):
+        if not str(surface_design[key] or "").strip():
+            raise ValueError(f"surface_design.{key} must be non-empty")
+    for key in ("paper_based", "distressed"):
+        if not isinstance(surface_design[key], bool):
+            raise ValueError(f"surface_design.{key} must be true or false")
+    paper_evidence = str(surface_design["paper_evidence"] or "").strip()
+    distress_evidence = str(surface_design["distress_evidence"] or "").strip()
+    if surface_design["paper_based"] and not paper_evidence:
+        raise ValueError(
+            "surface_design.paper_evidence is required when paper_based is true"
+        )
+    if not surface_design["paper_based"] and paper_evidence:
+        raise ValueError(
+            "surface_design.paper_evidence must be empty when paper_based is false"
+        )
+    if surface_design["distressed"] and not distress_evidence:
+        raise ValueError(
+            "surface_design.distress_evidence is required when distressed is true"
+        )
+    if not surface_design["distressed"] and distress_evidence:
+        raise ValueError(
+            "surface_design.distress_evidence must be empty when distressed is false"
+        )
+    surface_text = " ".join(
+        str(surface_design[key] or "")
+        for key in ("ground", "production_process", "quiet_field")
+    ).casefold()
+    if not surface_design["paper_based"] and any(
+        term.casefold() in surface_text for term in PAPER_SURFACE_TERMS
+    ):
+        raise ValueError(
+            "surface_design describes a paper ground or process but paper_based is false"
+        )
+
     forbidden = ("姓名", "片名", "PLACEHOLDER", "TBD", "20XX")
-    for role in ("verified_credits",):
+    for role in credit_roles:
         text = str(by_role[role]["text"]).strip()
         if not text:
             raise ValueError(f"Final poster {role} text is empty")
         if any(token.casefold() in text.casefold() for token in forbidden):
             raise ValueError(f"Final poster {role} still contains placeholder copy")
+        declared_size = float(by_role[role]["font_size"])
+        required_size = FINAL_CREDIT_ROLE_MIN_FONT_SIZES[role]
+        if declared_size < required_size:
+            raise ValueError(
+                f"Final poster {role} font_size {declared_size} is below "
+                f"the readable minimum {required_size}"
+            )
+
+    credit_design = layout.get("credit_design")
+    if not isinstance(credit_design, dict):
+        raise ValueError("Final poster layout requires a credit_design record")
+    required_credit_design_fields = (
+        "primary_axis",
+        "reserved_area",
+        "participation",
+        "creator_function",
+        "cast_function",
+        "credits_function",
+        "removal_test",
+    )
+    missing_credit_design = [
+        key
+        for key in required_credit_design_fields
+        if key not in credit_design
+        or credit_design[key] is None
+        or (
+            isinstance(credit_design[key], str)
+            and not credit_design[key].strip()
+        )
+    ]
+    if missing_credit_design:
+        raise ValueError(
+            "credit_design is missing: " + ", ".join(missing_credit_design)
+        )
+    reserved_area = float(credit_design["reserved_area"])
+    if not 0.12 <= reserved_area <= 0.30:
+        raise ValueError("credit_design.reserved_area must be between 0.12 and 0.30")
+    creator_size = float(by_role["creator_credit"]["font_size"])
+    cast_size = float(by_role["verified_cast"]["font_size"])
+    factual_size = float(by_role["verified_credits"]["font_size"])
+    if creator_size <= factual_size:
+        raise ValueError(
+            "creator_credit must be larger than verified_credits so the director "
+            "reads as an authored signature rather than compact billing"
+        )
+    if cast_size <= factual_size:
+        raise ValueError(
+            "verified_cast must be larger than verified_credits so principal names "
+            "read as a visible cast rail rather than compact billing"
+        )
 
     if "title" in by_role:
         title_text = str(by_role["title"]["text"]).strip()
@@ -739,7 +885,23 @@ def main() -> None:
     for block in iter_blocks(layout):
         font_size = max(8, round(float(block["font_size"]) * width))
         tracking = round(float(block.get("tracking", 0)) * width)
-        font = fit_font_to_width(block, args.layout, draw, font_size, tracking, width)
+        role = str(block.get("role", ""))
+        minimum_ratio = float(block.get("min_font_size", 0))
+        if args.final and role in FINAL_CREDIT_ROLE_MIN_FONT_SIZES:
+            minimum_ratio = max(
+                minimum_ratio,
+                FINAL_CREDIT_ROLE_MIN_FONT_SIZES[role],
+            )
+        minimum_size_px = max(8, round(minimum_ratio * width))
+        font = fit_font_to_width(
+            block,
+            args.layout,
+            draw,
+            font_size,
+            tracking,
+            width,
+            minimum_size_px,
+        )
         xy = (round(float(block["x"]) * width), round(float(block["y"]) * height))
         color = block.get("color", "#111111")
         align = block.get("align", "left")

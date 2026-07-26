@@ -1,5 +1,26 @@
 {
   "credit_sources": [],
+  "surface_design": {
+    "ground": null,
+    "story_evidence": null,
+    "production_process": null,
+    "palette_logic": null,
+    "quiet_field": null,
+    "recent_output_delta": null,
+    "paper_based": false,
+    "paper_evidence": null,
+    "distressed": false,
+    "distress_evidence": null
+  },
+  "credit_design": {
+    "primary_axis": null,
+    "reserved_area": 0.16,
+    "participation": null,
+    "creator_function": null,
+    "cast_function": null,
+    "credits_function": null,
+    "removal_test": null
+  },
   "image_native_title": null,
   "title_design": {
     "primary_evidence": null,
@@ -51,11 +72,39 @@
       "font": null
     },
     {
-      "text": "导演：姓名  编剧：姓名\n主演：姓名 / 姓名 / 姓名",
-      "role": "verified_credits_placeholder",
+      "text": "导演　姓名",
+      "role": "creator_credit",
       "x": 0.08,
-      "y": 0.92,
-      "font_size": 0.012,
+      "y": 0.84,
+      "font_size": 0.018,
+      "min_font_size": 0.014,
+      "color": "#171411",
+      "align": "left",
+      "orientation": "horizontal",
+      "tracking": 0.002,
+      "font": null
+    },
+    {
+      "text": "主演甲　主演乙　主演丙",
+      "role": "verified_cast",
+      "x": 0.08,
+      "y": 0.89,
+      "font_size": 0.02,
+      "min_font_size": 0.015,
+      "color": "#171411",
+      "align": "left",
+      "orientation": "horizontal",
+      "tracking": 0.003,
+      "max_width": 0.84,
+      "font": null
+    },
+    {
+      "text": "导演　姓名　　编剧　姓名甲 / 姓名乙\n主演　主演甲 / 主演乙 / 主演丙",
+      "role": "verified_credits",
+      "x": 0.08,
+      "y": 0.94,
+      "font_size": 0.014,
+      "min_font_size": 0.0125,
       "color": "#6B655E",
       "align": "left",
       "orientation": "horizontal",

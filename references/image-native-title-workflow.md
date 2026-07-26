@@ -37,7 +37,7 @@ Use these treatments to force structural variation. They are title roles, not fi
 
 | Treatment | Evidence behavior | Title behavior |
 |---|---|---|
-| A — Evidence intervention | film-grounded archive, rubbing, map, document, prop trace, print, or historical fragment enters the page | title behaves as inscription, specimen, crop, label, or one archival interruption |
+| A — Evidence intervention | film-grounded map, projection, object trace, garment, weather record, document, print, or historical fragment enters the page | title behaves as inscription, specimen, crop, label, or one evidenced interruption |
 | B — Single evidence | one object, material, gesture, costume, weather trace, or location fragment is the visual boss | title stays controlled and gains meaning through alignment, pressure, reflection, edge, or one material action |
 | C — Title structure | the title carries more of the composition | title becomes a readable frame, mask, crop-window, relief, section, threshold, or structural rail without turning the entire world into a literal glyph |
 
@@ -65,7 +65,7 @@ Score each candidate from 1–5 for:
 - formal beauty;
 - visual economy;
 - exact-title legibility;
-- distance from the last five outputs.
+- distance from the last five outputs in title mechanism, ground material, production process, dominant hue, and accent family.
 
 Select only a mechanism averaging at least 4, with story inevitability, formal beauty, and legibility each at least 4. Carry the strongest three mechanisms into the three poster concepts.
 

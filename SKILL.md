@@ -19,9 +19,12 @@ Create an original narrative poster from the film's dramatic core. Treat admired
 Read only what the task needs:
 
 - Always read [references/narrative-analysis.md](references/narrative-analysis.md) and [references/metaphor-grammar.md](references/metaphor-grammar.md).
+- Always read [references/art-direction-routing.md](references/art-direction-routing.md) to create the design thesis, choose a visual lane, diversify concepts, and run the subtractive refinement pass.
 - Read [references/composition-recipes.md](references/composition-recipes.md) to choose layout, material, palette, and genre treatment.
+- Always read [references/material-palette-routing.md](references/material-palette-routing.md) to select a story-evidenced ground, prevent repeated paper or distressed-print surfaces, and record the final surface contract.
 - Read [references/authored-reference-translation.md](references/authored-reference-translation.md) whenever the user names an artist, studio, campaign, poster, or visual reference.
 - Read [references/typography.md](references/typography.md) before adding real titles, credits, dates, or bilingual copy.
+- Read [references/credit-typography.md](references/credit-typography.md) for every Standard or Series poster before reserving space or composing verified names.
 - Read [references/title-design-patterns.md](references/title-design-patterns.md) when designing any expressive title, dominant title structure, material-filled glyph, custom character construction, or typography-led series.
 - Read [references/image-native-title-workflow.md](references/image-native-title-workflow.md) when the user asks for image-integrated Chinese typography, fantasy text treatment, editorial title fusion, title generation consistent with `oriental-editorial-poster`, or rejection of ordinary post-added fonts.
 - Read [references/quality-gate.md](references/quality-gate.md) before final delivery.
@@ -56,7 +59,19 @@ Follow `references/narrative-analysis.md`. Reduce the film to:
 
 Do not summarize the entire plot in the poster.
 
-### 3. Translate authored references
+### 3. Establish the art direction
+
+Follow `references/art-direction-routing.md`:
+
+1. write a compact, original design thesis with spatial, scale, material, color, and typography laws;
+2. choose one primary direction lane because the film requires it;
+3. select one symbolic-compression pattern;
+4. choose a ground and image-making process from `material-palette-routing.md`, then state their story evidence and difference from recent outputs;
+5. set a visible complexity budget: one focal point, one primary metaphor, no more than three major narrative masses, one close-read reward, and at most one interruptor.
+
+Do not select a named style. A direction must remain understandable after every artist and studio name is removed.
+
+### 4. Translate authored references
 
 When the brief names an admired artist or work, follow `references/authored-reference-translation.md`:
 
@@ -67,18 +82,22 @@ When the brief names an admired artist or work, follow `references/authored-refe
 
 Do not treat ink wash, calligraphy, vintage grain, or any palette as a style shortcut. Every visible choice must follow from the film.
 
-### 4. Propose three concepts
+### 5. Propose three concepts
 
 Make the concepts structurally different. For each provide:
 
 - concept name;
+- design thesis and primary direction lane;
 - one-sentence visual hook;
 - primary motif and metaphor operation;
-- composition family, material, palette, typography mode, title-integration behavior, and credit-block zone;
+- composition family, ground, story evidence, production process, palette roles, typography mode, title-integration behavior, and credit-block zone;
+- director-signature position, principal-cast rail, factual-base position, and their shared compositional axis;
 - title material fact, semantic pivot, one title action, text-reserve level, and beauty engine;
 - why the title mechanism cannot be moved unchanged to an unrelated film;
 - why it belongs to this film;
 - spoiler risk: low, medium, or high.
+
+Normally assign the concepts three different roles: Symbol, Evidence, and Structure. Complete the diversity matrix in `references/art-direction-routing.md`; the concepts must differ across at least four axes, including ground or production process. Do not submit three palette or crop variations of one composition.
 
 When `image-native-title-workflow.md` applies, first develop six title mechanisms privately and carry the strongest three into the three public poster concepts. Normally span A — evidence intervention, B — single evidence, and C — title structure. Treat these as title roles rather than fixed layouts; vary evidence role, title role, axis, crop logic, and reading path.
 
@@ -90,13 +109,15 @@ Run a title test: if the title could be moved anywhere without changing the comp
 
 Run the semantic mechanism gate in `references/title-design-patterns.md`. Reject a title direction when its story inevitability, formal beauty, or legibility scores below 4/5. Use one primary evidence field, one title action, and at most one interruptor. Mentally hide the title for one second; if the remaining image has no sensory or emotional pull, rebuild the image language.
 
-### 5. Compile the visual recipe
+### 6. Compile the visual recipe
 
 Choose one value from each axis:
 
 ```text
-format / composition family / metaphor operation / primary motif /
-scale relation / material process / palette / title behavior /
+format / design thesis / direction lane / composition family /
+symbolic-compression pattern / metaphor operation / primary motif /
+scale relation / ground / story evidence / material process /
+palette roles / recent-output delta / title behavior /
 title action / text reserve / interruptor / beauty engine /
 credit behavior / emotional temperature
 ```
@@ -105,7 +126,7 @@ Use a single primary visual mechanism. Favor a legible silhouette and a strong n
 
 Default format is a vertical 2:3 poster. Use 3:4 for social feeds and 9:16 for full-screen mobile only when requested or clearly appropriate. Keep all critical elements within a 7% safe margin.
 
-### 6. Compile the image prompt
+### 7. Compile the image prompt
 
 Choose the title-production route before writing the prompt:
 
@@ -117,13 +138,17 @@ Default to Native controlled for a 1–4 character Chinese title when the user a
 
 Write five compact paragraphs in this order:
 
-1. canvas, aspect ratio, surface, and intended poster function;
+1. canvas, aspect ratio, intended poster function, and the story-world substance occupying the ground;
 2. attention geometry, subject size, location, and negative-space behavior;
 3. exact visual metaphor, motif relationship, and scale contrast;
-4. medium, texture, palette, light, and emotional temperature;
+4. evidenced image-making process, palette roles, light, and emotional temperature;
 5. hard avoids.
 
 Describe only visible pixels. Use concrete nouns, spatial relationships, proportions, materials, and colors. Do not include analysis, field labels, a designer's name, or long prose.
+
+Do not open with paper, parchment, warm neutral stock, screen print, halftone, grain, fading, or ink misregistration unless `material-palette-routing.md` finds direct film evidence. A quiet field may be sky, darkness, fog, water, snow, wall, stage light, distant landscape, or a clean color field; quiet space does not imply paper.
+
+Freeze the production contract in `references/art-direction-routing.md` before generation. Quote every model-rendered text string verbatim, label each supplied image's role, and record invariants and must-avoid items. If editing an existing result, request one visible change at a time while repeating the invariants.
 
 Scrub the prompt before generation:
 
@@ -148,18 +173,22 @@ Hard avoids:
 - decorative dragons, clouds, seals, ink, or calligraphy added only to signal “Chinese”;
 - multiple competing metaphors;
 - fake awards, festival laurels, logos, dates, credits, or ratings;
+- generic aged paper, parchment, kraft stock, paper tooth, sepia fading, distressed edges, or automatic screen-print misregistration used as prestige shorthand;
+- the repeated bone-white + charcoal + vermilion palette unless every color has a film-specific job;
 - glossy mockups, product-ad layouts, UI panels, watermarks, neon cyberpunk defaults, generic blockbuster glow, and game-key-art clutter;
 - exact imitation of a named living artist or a recognizable existing poster composition.
 
-### 7. Generate and inspect key art
+### 8. Generate and inspect key art
 
 Use the built-in image-generation capability unless in Concept or Prompt-only mode. Use supplied images only according to the user's stated role: identity reference, costume reference, location reference, or source material.
 
 Inspect the generated key art at full size and thumbnail size. Regenerate with one targeted correction when the main metaphor is missing, the silhouette collapses, text artifacts dominate, spectacle overwhelms meaning, culturally irrelevant decoration appears, or the result closely echoes a known poster.
 
+Once a viable result exists, run the subtractive refinement sequence in `references/art-direction-routing.md`: meaning, silhouette, hierarchy, geometry, material, color, typography, then craft. Prefer removing, aligning, clarifying, or correcting before adding another element. Name the defect addressed by each regeneration or edit.
+
 For a native title, inspect every character, character order, language variant, punctuation, false radical, duplicated stroke group, question mark, and accidental second title. If the H1 is wrong, do not cover it with conventional text. Simplify the title prompt and regenerate. After two failed native attempts, switch explicitly to Deterministic exact. Record the accepted title and validation method in `image_native_title`.
 
-### 8. Finish exact copy
+### 9. Finish exact copy
 
 Follow `references/typography.md`. Keep either the text-free key art or the accepted generated title-bearing poster plate. Create a layout JSON from [assets/layout-example.json](assets/layout-example.json), then run:
 
@@ -169,23 +198,28 @@ python scripts/compose_poster.py --background <key-art.png> --layout <layout.jso
 
 For every Standard or Series poster:
 
-1. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
-2. for a native title, keep the accepted generated H1 and do not add a second title block;
-3. for a deterministic title, make its axis, scale, spacing, color, and position complete the selected metaphor;
-4. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
-5. use per-character construction, one selected material image, or one story-grounded effect when a deterministic title needs custom form;
-6. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
-7. typeset a verified credit block containing at minimum the director and principal cast, plus the screenwriter when reliably available;
-8. when space permits, split verified facts into a designed creator line, principal-cast rail, and compact credit block instead of one tiny afterthought;
-9. align credit groups to the title, motif, architectural edge, horizon, or dominant axis so removing them would weaken the finished poster hierarchy;
-10. keep credits subordinate but readable at full size;
-11. inspect title-motif interaction and credit legibility at both full size and thumbnail size.
+1. record `surface_design` from `references/material-palette-routing.md`; declare the ground, story evidence, production process, palette logic, quiet-field substance, recent-output delta, and whether paper or distress is used;
+2. preserve the exact approved film title; do not shorten or paraphrase it for design convenience;
+3. for a native title, keep the accepted generated H1 and do not add a second title block;
+4. for a deterministic title, make its axis, scale, spacing, color, and position complete the selected metaphor;
+5. choose one title structure from `references/title-design-patterns.md`; do not rely on font choice alone;
+6. use per-character construction, one selected material image, or one story-grounded effect when a deterministic title needs custom form;
+7. use a precise single window or single interruption instead of arbitrary repeated cutouts when the story calls for containment or fracture;
+8. reserve 12–22% of the full poster for the complete cast-and-crew system; the reserve may be distributed across the composition;
+9. create all three required roles from verified facts: `creator_credit`, `verified_cast`, and `verified_credits`;
+10. treat `creator_credit` as an authored signature or counterweight, `verified_cast` as a prominent name rail, and `verified_credits` as the compact factual base; never make the bottom block the only readable occurrence of the director or principal cast;
+11. make the groups participate through one primary mechanism from `references/credit-typography.md`, sharing an axis, rail, counterweight, threshold, scale rhythm, material cue, or evidence structure with the title and motif;
+12. set `credit_design.primary_axis`, `reserved_area`, `participation`, `creator_function`, `cast_function`, `credits_function`, and `removal_test` in the layout JSON; describe visible relationships rather than writing “integrated with the design”;
+13. keep `creator_credit` at least 1.4%, `verified_cast` at least 1.5%, and `verified_credits` at least 1.25% of poster width; both creator and cast must be larger than the factual base, with larger sizes preferred for mobile delivery;
+14. add meaningful line breaks or enlarge the reserve instead of shrinking names below the readable floor;
+15. hide the director signature and cast rail separately; if neither removal weakens balance, direction, rhythm, or authorship, redesign their placement;
+16. inspect title-motif interaction, surface specificity, palette difference, and credit legibility at thumbnail, phone, and full size.
 
 Prefer an explicitly supplied licensed font. The script can use common system fallbacks, but verify Chinese glyph coverage visually. Never fabricate names, roles, billing order, production companies, or a production billing block.
 
-Always use `--final` for the delivered poster. It accepts either an exact `title` block or a validated `image_native_title` record, and always requires `verified_credits`, a non-empty `credit_sources` list, and no common placeholder tokens.
+Always use `--final` for the delivered poster. It accepts either an exact `title` block or a validated `image_native_title` record, and requires a consistent `surface_design` declaration, the three credit roles, an explicit role-by-role `credit_design` record with a removal test, a non-empty `credit_sources` list, readable hierarchy, minimum sizes, and no common placeholder tokens.
 
-### 9. Validate and deliver
+### 10. Validate and deliver
 
 Apply `references/quality-gate.md`. Return:
 

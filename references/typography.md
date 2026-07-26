@@ -60,6 +60,7 @@ Use title-as-architecture only when the letterform meaning or structure belongs 
 
 ## Credits
 
+- Read `credit-typography.md` and build its three required groups for every Standard or Series poster.
 - Require verified names and roles before final export.
 - Include at minimum the director and principal cast; include the screenwriter when reliably available.
 - Preserve supplied billing order. Do not infer contractual prominence.
@@ -72,21 +73,7 @@ Use title-as-architecture only when the letterform meaning or structure belongs 
 
 ### Credit architecture
 
-Treat credits as the poster's factual secondary composition, not export residue. When the image has sufficient reserve, build up to three groups:
-
-1. **creator line** — director, writer, or “a film by” equivalent near an existing architectural edge, quiet field, or title axis;
-2. **principal-cast rail** — principal cast or voice performers as a deliberate horizontal or vertical name rhythm;
-3. **compact verified credits** — role-labeled director, writer, music, and principal cast in the final information zone.
-
-All groups must come from `credit_sources`. Use roles such as `creator_credit`, `verified_cast`, and `verified_credits`; `verified_credits` remains mandatory for `--final`.
-
-- Plan these zones in the image prompt even when factual text is added later.
-- Share a baseline, centerline, edge, window rail, horizon, or title axis with the visual system.
-- Use scale contrast: creator line or cast rail may be more visible than the compact credit block, but neither may compete with the H1.
-- Do not place every name in one tiny two-line block merely to pass validation.
-- Do not fabricate contractual billing order. When no approved legal billing is supplied, label roles and preserve source order.
-- Avoid decorative pseudo-billing, condensed all-caps imitations, logos, union marks, and production-company lines unless exact approved copy is supplied.
-- At full size, every factual group must be readable. At thumbnail size, it may resolve as a calm rail or block that completes the poster geometry.
+Follow `credit-typography.md`. Reserve 12–22% of the poster, require `creator_credit`, `verified_cast`, and `verified_credits`, and declare how they participate in the main geometry. Do not use a tiny centered footer as the default solution.
 
 ## Font and copy rules
 
@@ -119,7 +106,7 @@ Copy `assets/layout-example.json` and edit normalized positions. Coordinates are
 }
 ```
 
-`font_size`, `tracking`, and optional `max_width` are fractions of poster width. `line_spacing` is a multiplier of font size. A `font` path may be absolute or relative to the layout file. Inspect the result visually; automated placement cannot judge collisions with key art.
+`font_size`, `min_font_size`, `tracking`, and optional `max_width` are fractions of poster width. `line_spacing` is a multiplier of font size. A `font` path may be absolute or relative to the layout file. `min_font_size` prevents fit-to-width from silently shrinking factual copy below the readable floor. Inspect the result visually; automated placement cannot judge collisions with key art.
 
 Use `"effect": "split_chalk"` only when fractured, athletic, handmade title lettering belongs to the story. Optional `effect_strength` controls band displacement and `effect_seed` keeps the erosion deterministic. Treat the effect as custom lettering, not a universal preset.
 
@@ -127,4 +114,4 @@ Use `"effect": "rain_canopy"` when rain, shelter, growth, or forest protection i
 
 Additional structural effects are documented in `title-design-patterns.md`: `stroke_architecture`, `negative_window`, `interrupt_cut`, `relief_press`, `outline_echo`, and `mirror_fade`. Use `effect_windows` for one precise negative-space opening. Use `character_layout` for per-character scale, offset, rotation, color, opacity, stroke, or a traceable `fill_image`. Combine no more than one structural effect with one story-grounded material treatment.
 
-Export delivered posters with `compose_poster.py --final`. The final-copy check requires either a `title` block or a validated `image_native_title` record, plus `verified_credits`, a non-empty `credit_sources` array, and no common placeholder tokens.
+Export delivered posters with `compose_poster.py --final`. The final-copy check requires either a `title` block or a validated `image_native_title` record; all three credit roles; a valid `credit_design` record; a non-empty `credit_sources` array; readable font floors; and no common placeholder tokens.
