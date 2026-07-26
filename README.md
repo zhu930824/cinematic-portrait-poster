@@ -4,6 +4,49 @@
 
 这个 Skill 的重点不是套用固定模板，而是让每张海报拥有与影片内容对应的空间、材质、色彩和文字结构。
 
+## 作品展示
+
+以下示例展示同一套海报工作流在科幻、奇幻、动画、年代谍战与黑色喜剧题材中的视觉变化。图片均为 2:3 竖版主视觉或概念海报。
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/images/interstellar-key-art.png" alt="《星际穿越》概念海报" width="100%">
+      <br><strong>《星际穿越》</strong>
+      <br>重力书架与跨越时间的金色轨迹
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/images/inception-key-art.png" alt="《盗梦空间》概念海报" width="100%">
+      <br><strong>《盗梦空间》</strong>
+      <br>由一枚红色意念支撑的倒悬梦境
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/images/howls-moving-castle-key-art.png" alt="《哈尔的移动城堡》概念海报" width="100%">
+      <br><strong>《哈尔的移动城堡》</strong>
+      <br>以魔法罗盘为心脏的机械城堡
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/images/my-neighbor-totoro-key-art.png" alt="《龙猫》概念海报" width="100%">
+      <br><strong>《龙猫》</strong>
+      <br>雨幕、树叶与负形共同构成片名
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/images/catch-the-spy-key-art.png" alt="《抓特务》概念海报" width="100%">
+      <br><strong>《抓特务》</strong>
+      <br>一线门光分隔两名潜伏者的影子
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/images/let-the-bullets-fly-key-art.png" alt="《让子弹飞》概念海报" width="100%">
+      <br><strong>《让子弹飞》</strong>
+      <br>让子弹、铁轨与片名共享同一动势
+    </td>
+  </tr>
+</table>
+
 ## 主要能力
 
 - 从片名、剧情、剧本或角色简介中提炼叙事 DNA。
@@ -165,4 +208,3 @@ cinematic-portrait-poster/
 - 导演与主演信息需要参与平衡、方向或节奏。
 - 参考优秀作品时学习方法，不复制可识别的构图与风格签名。
 - 优先删除无关装饰，再增加新的视觉元素。
-
